@@ -24,7 +24,7 @@ Le déploiement fonctionne comme suit :
 1. **Exécuter les Playbooks Ansible** :
 
     - Utilisez les commandes suivantes pour déployer l'application :
-    
+
     ```bash
     ansible-playbook -i /home/ubuntu/ansible/aws_ec2.yml /home/ubuntu/ansible/docker.yml --private-key=/home/ubuntu/.ssh/connexion.pem --ssh-extra-args="-o StrictHostKeyChecking=no"
     ```
@@ -33,7 +33,7 @@ Remplacer les informations en liens avec la base de données dans les fichiers /
 
     ```bash
     ansible-playbook -i /home/ubuntu/ansible/aws_ec2.yml /home/ubuntu/ansible/apache-php.yml --private-key=/home/ubuntu/.ssh/connexion.pem --ssh-extra-args="-o StrictHostKeyChecking=no"
-    ansible-playbook -i localhost database.yml
+    ansible-playbook -i localhost /home/ubuntu/ansible/database.yml
     ```
     
 2. **Vérification** : Copiez le DNS du load balancer et vérifiez que l'application est accessible via le navigateur et que tous les services sont opérationnels.
