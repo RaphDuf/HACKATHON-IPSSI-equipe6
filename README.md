@@ -8,7 +8,7 @@ Ils comportent les différentes page du site et la définitions des actions mise
 Le dossier 'dump' contient un fichier sql. Ce dernier provient de l'infra de base (VM fournie). 
 Pour l'obtenir, nous utilisons la commande suivante : 
 ```
-mysqldump -u root -p greenshop > database.sql
+mysqldump -u root -p greenshop > greenshop_dump.sql
 ```
 Cette commande réalise un dump de la base mariaDB nommé 'greenshop' en utilisant le user 'root' et l'enregistre dans un fichier. 
 
@@ -16,9 +16,9 @@ Cette commande réalise un dump de la base mariaDB nommé 'greenshop' en utilisa
 Il est nescessaire d'installer Docker Desktop (https://docs.docker.com/get-started/introduction/get-docker-desktop/). 
 
 ## Dockerfile
-Le Dockerfile contient la définition de l'image de l'application. L'image se base sur l'image officielle php version 8.1.2 avec apache. Elle installe les extensions PHP pour PDO et MySQL permettant de communiquer avec la base de donnée, copie le dossier 'greenshop' (qui contient les fichiers de configuration), change le propriétaire et les permissions sur /var/www/html pour le user Apache 'www-data', et expose le port 80 (port par défaut d'Apache). 
+Le Dockerfile contient la définition de l'image de l'application. L'image se base sur l'image officielle php version 8.1.2 avec apache. Elle installe les extensions PHP pour PDO et MySQL permettant de communiquer avec la base de données, copie le dossier 'greenshop' (qui contient les fichiers de configuration), change le propriétaire et les permissions sur /var/www/html pour le user Apache 'www-data', et expose le port 80 (port par défaut d'Apache). 
 
 ## Docker-compose
 Le docker-compose permet de build l'image défini précédement et l'image mariadb depuis docker-hub. 
-Dans le service 'web' on spécifie la redirection de port 8080:80 pour Apache. 
+Dans le service 'web' on spécifie la redirection de port 80:80 pour Apache. 
 Dans le service 'db' on spécifie les variables d'environement avec le mot de passe, le user et le nom de la base, ainsi que la redirection de port 3306:3306 pour mariDB et on monte un volume local contenant les scripts SQL d'initialisation. 
