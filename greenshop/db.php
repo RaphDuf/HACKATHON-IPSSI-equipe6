@@ -1,5 +1,5 @@
 <?php
-$host = 'hackaton-db-1';
+$host = 'greenshop-db-1';
 $dbname = 'greenshop';
 $username = 'greenshop_user';
 $password = 'your_secure_password';
