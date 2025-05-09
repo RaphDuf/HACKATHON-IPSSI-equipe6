@@ -7,24 +7,11 @@ La section commentée du script (non active mais prête à l’usage) permet de 
 
 Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la **Console AWS**. Dans la section **EC2**, allez dans **Key Pairs** sous **Network & Security** et cliquez sur **Create key pair**. Donnez un nom à votre clé, choisissez le type **RSA** et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée `.pem` généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2. Une fois l'instance en cours d'exécution, récupérez son adresse IP publique et utilisez la commande suivante dans un terminal pour vous connecter à l'instance :
 
+Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la **Console AWS**. Dans la section **EC2**, allez dans **Key Pairs** sous **Network & Security** et cliquez sur **Create key pair**. Donnez un nom à votre clé, choisissez le type **RSA** et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée `.pem` généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2. Une fois l'instance en cours d'exécution, récupérez son adresse IP publique et utilisez la commande suivante dans un terminal pour vous connecter à l'instance :
+
 ```bash
 ssh -i /path/to/your-key.pem ec2-user@<public-ip>
 
-Ce mécanisme est pratique pour **automatiser la génération et la distribution des clés** sans intervention manuelle.
-
-## Security_group.tf
-
-Ce script Terraform configure plusieurs **groupes de sécurité** essentiels pour protéger et segmenter les différentes couches de l’infrastructure réseau de **GreenShop** déployée sur AWS.
-
-- Le **premier groupe de sécurité**, destiné au **Load Balancer**, autorise les connexions entrantes sur les ports **HTTP (80)** et **HTTPS (443)** depuis n'importe quelle adresse IP, ce qui permet aux utilisateurs finaux d'accéder à l’application via le web. Les connexions sortantes sont également autorisées.
-
-- Le **second groupe**, celui du **bastion host**, permet uniquement les connexions **SSH (port 22)** depuis l'extérieur, offrant un point d'accès sécurisé à l'infrastructure privée pour les administrateurs.
-
-- Le **troisième groupe**, utilisé pour les **instances applicatives privées**, accepte les connexions **SSH, HTTP et HTTPS**, afin de permettre à ces instances de communiquer avec le bastion et le Load Balancer.
-
-- Enfin, le groupe de sécurité pour la **base de données RDS** autorise le trafic entrant sur le **port 3306** (utilisé par MySQL), permettant uniquement les connexions nécessaires à partir des services internes.
-
-Cette configuration assure une **isolation réseau stricte** et un **contrôle fin des flux** entre les différentes ressources cloud.
 
 ## Instances.tf
 
