@@ -21,4 +21,4 @@ Le Dockerfile contient la définition de l'image de l'application. L'image se ba
 ## Docker-compose
 Le docker-compose permet de build l'image défini précédement et l'image mariadb depuis docker-hub. 
 Dans le service 'web' on spécifie la redirection de port 80:80 pour Apache. 
-Dans le service 'db' on spécifie les variables d'environement avec le mot de passe, le user et le nom de la base, ainsi que la redirection de port 3306:3306 pour mariDB et on monte un volume local contenant les scripts SQL d'initialisation. 
+Dans le service 'db' on spécifie les variables d'environement avec le mot de passe, le user et le nom de la base, ainsi que la redirection de port 3306:3306 pour mariaDB et on monte un volume local contenant les scripts SQL d'initialisation. 
