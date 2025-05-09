@@ -1,14 +1,44 @@
 # Documentation de Terraform
+
 ## Prerequis:
-compte AWS
-Instance EC2
-Installer AWS-CLI :Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la Console AWS. Dans la section EC2, allez dans Key Pairs sous Network & Security et cliquez sur Create key pair. Donnez un nom à votre clé, choisissez le type RSA et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée .pem généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2.   Pour gérer vos ressources AWS via la ligne de commande, installez AWS CLI et configurez-le avec aws configure. Lors de la configuration, entrez votre AWS Access Key ID, AWS Secret Access Key que vous allez trouver dans Vous pouvez installer AWS CLI , puis le configurer avec vos identifiants AWS, disponibles dans la section "AWS details" de votre compte AW, la région et le format de sortie. Une fois configuré, vous pouvez l'utiliser pour gérer vos instances EC2
-Installation de terraform 
+
+- **Posséder un compte AWS**  
+- **Installer AWS-CLI** : Pour gérer vos ressources AWS via la ligne de commande, installez AWS CLI et configurez-le avec aws configure. Lors de la configuration, entrez votre AWS Access Key ID, AWS Secret Access Key que vous allez trouver dans Vous pouvez installer AWS CLI , puis le configurer avec vos identifiants AWS, disponibles dans la section "AWS details" de votre compte AW, la région et le format de sortie. Une fois configuré, vous pouvez l'utiliser pour gérer vos instances EC2.
+- **Installation de terraform** [Documentation Terraform](https://developer.hashicorp.com/terraform/install)
+- **Informations d'identification AWS** : Configurer les informations d'identification AWS dans `./data/credentials` car elle sera utilisée par la suite avec Ansible.
+- **Copier la clé SSH dans le dossier data** car elle sera utilisée par la suite avec Ansible.
+
+## Mise en place du déploiement
+
+ - Se placer dans le dossier contenant le code terraform.
+ - Utilisez les commandes suivantes pour déployer l'application :
+    
+    ```bash
+        terraform init
+    ```
+    ```bash
+        terraform plan
+    ```
+    ```bash
+        terraform apply
+    ```
+  Terraform informe de toutes les modifications qui seront apportées à l'infrastructure. Répondre **yes** à la question.
+
+  Pour poursuivre l'installation de l'infrastructure via ansible. Suivre le [README2.md](https://github.com/RaphDuf/HACKATHON-IPSSI-equipe6/blob/infrastructure/README2.md)
+
+## Suppression de l'infrastructure déployée 
+
+Pour détruire l'infrastructure déployer par Terraform rentrer la commande suivante et répondre **yes** à la question : 
+
+ ```bash
+        terraform destroy
+  ```
+
 
 ## main.tf
 Ce module Terraform commence par la déclaration du **provider AWS**, en spécifiant la région d’hébergement des ressources (ici, `us-east-1`). Il crée ensuite un **Virtual Private Cloud (VPC)**, élément central du réseau dans AWS. Ce VPC utilise la plage d’adresses IP privée `10.0.0.0/16`, avec l’activation du support **DNS** et des **noms d’hôtes**, ce qui est essentiel pour la résolution de noms au sein du réseau. Le VPC est également tagué pour une meilleure lisibilité dans la console AWS (`Name = "main-vpc"`).
 
-La section commentée du script (non active mais prête à l’usage) permet de générer automatiquement une **paire de clés SSH RSA 4096 bits** à l’aide de Terraform et du provider `tls`. Cette clé permettrait un accès sécurisé aux futures instances EC2. La **clé publique** est alors importée dans AWS sous forme d’un `aws_key_pair` nommé `connexion`. La **clé privée**, quant à elle, est enregistrée localement dans un fichier `.pem`, avec des **permissions strictes** pour garantir la sécurité.
+La seconde section permet de générer automatiquement une **paire de clés SSH RSA 4096 bits** à l’aide de Terraform et du provider `tls`. Cette clé permettrait un accès sécurisé aux futures instances EC2. La **clé publique** est alors importée dans AWS sous forme d’un `aws_key_pair` nommé `connexion`. La **clé privée**, quant à elle, est enregistrée localement dans un fichier `.pem`, avec des **permissions strictes** pour garantir la sécurité.
 
 ## Instances.tf
 

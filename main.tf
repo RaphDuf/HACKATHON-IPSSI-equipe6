@@ -12,22 +12,21 @@ resource "aws_vpc" "main" {
   }
 }
 
-# # Générer une paire de clés SSH
-# resource "tls_private_key" "connexion" {
-#   algorithm = "RSA"
-#   rsa_bits  = 4096
-# }
+# Générer une paire de clés SSH
+resource "tls_private_key" "connexion" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
 
-# # Importer la clé publique dans AWS
-# resource "aws_key_pair" "connexion" {
-#   key_name   = "connexion"
-#   public_key = tls_private_key.connexion.public_key_openssh
-# }
+# Importer la clé publique dans AWS
+resource "aws_key_pair" "connexion" {
+  key_name   = "connexion"
+  public_key = tls_private_key.connexion.public_key_openssh
+}
 
-# # Sauvegarder la clé privée dans un fichier local
-# resource "local_file" "private_key" {
-#   content  = tls_private_key.connexion.private_key_pem
-#   filename = "${path.module}/connexion.pem"
-#   file_permission = "0600"
-# }
-
+# Sauvegarder la clé privée dans un fichier local
+resource "local_file" "private_key" {
+  content  = tls_private_key.connexion.private_key_pem
+  filename = "${path.module}/connexion.pem"
+  file_permission = "0600"
+}
