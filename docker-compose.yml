@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: greenshop
+      MYSQL_USER: greenshop_user
+      MYSQL_PASSWORD: your_secure_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+ 
