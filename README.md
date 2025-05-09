@@ -25,7 +25,7 @@ Dans le service 'web' on spécifie la redirection de port 80:80 pour Apache.
 Dans le service 'db' on spécifie les variables d'environement avec le mot de passe, le user et le nom de la base, ainsi que la redirection de port 3306:3306 pour mariaDB et on monte un volume local contenant les scripts SQL d'initialisation. 
 Pour lancer le build des images, utiliser la commande suivante : 
 ```
-docker compose -d
+docker compose up -d
 ```
 Pour vérifier le status des containers, utiliser la commande : 
 ```
