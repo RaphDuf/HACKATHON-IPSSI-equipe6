@@ -1,7 +1,7 @@
 node {
     
     def registryProjet='cyprien962/'
-    def IMAGE="${registryProjet}greenshop:version-${env.BUILD_ID}"
+    def IMAGE="${registryProjet}hackathon-ipssi-equipe6:version-${env.BUILD_ID}"
     
     stage('Clone') {
         checkout scm
