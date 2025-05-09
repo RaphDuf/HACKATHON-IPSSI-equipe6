@@ -5,6 +5,11 @@ Ce module Terraform commence par la déclaration du **provider AWS**, en spécif
 
 La section commentée du script (non active mais prête à l’usage) permet de générer automatiquement une **paire de clés SSH RSA 4096 bits** à l’aide de Terraform et du provider `tls`. Cette clé permettrait un accès sécurisé aux futures instances EC2. La **clé publique** est alors importée dans AWS sous forme d’un `aws_key_pair` nommé `connexion`. La **clé privée**, quant à elle, est enregistrée localement dans un fichier `.pem`, avec des **permissions strictes** pour garantir la sécurité.
 
+Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la **Console AWS**. Dans la section **EC2**, allez dans **Key Pairs** sous **Network & Security** et cliquez sur **Create key pair**. Donnez un nom à votre clé, choisissez le type **RSA** et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée `.pem` généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2. Une fois l'instance en cours d'exécution, récupérez son adresse IP publique et utilisez la commande suivante dans un terminal pour vous connecter à l'instance :
+
+```bash
+ssh -i /path/to/your-key.pem ec2-user@<public-ip>
+
 Ce mécanisme est pratique pour **automatiser la génération et la distribution des clés** sans intervention manuelle.
 
 ## Security_group.tf
