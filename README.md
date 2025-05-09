@@ -5,14 +5,7 @@ Ce module Terraform commence par la déclaration du **provider AWS**, en spécif
 
 La section commentée du script (non active mais prête à l’usage) permet de générer automatiquement une **paire de clés SSH RSA 4096 bits** à l’aide de Terraform et du provider `tls`. Cette clé permettrait un accès sécurisé aux futures instances EC2. La **clé publique** est alors importée dans AWS sous forme d’un `aws_key_pair` nommé `connexion`. La **clé privée**, quant à elle, est enregistrée localement dans un fichier `.pem`, avec des **permissions strictes** pour garantir la sécurité.
 
-Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la **Console AWS**. Dans la section **EC2**, allez dans **Key Pairs** sous **Network & Security** et cliquez sur **Create key pair**. Donnez un nom à votre clé, choisissez le type **RSA** et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée `.pem` généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2. Une fois l'instance en cours d'exécution, récupérez son adresse IP publique et utilisez la commande suivante dans un terminal pour vous connecter à l'instance :
-
-Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la **Console AWS**. Dans la section **EC2**, allez dans **Key Pairs** sous **Network & Security** et cliquez sur **Create key pair**. Donnez un nom à votre clé, choisissez le type **RSA** et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée `.pem` généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2. Une fois l'instance en cours d'exécution, récupérez son adresse IP publique et utilisez la commande suivante dans un terminal pour vous connecter à l'instance :
-
-```bash
-ssh -i /path/to/your-key.pem ec2-user@<public-ip>
-```
-
+Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la Console AWS. Dans la section EC2, allez dans Key Pairs sous Network & Security et cliquez sur Create key pair. Donnez un nom à votre clé, choisissez le type RSA et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée .pem généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2.   Pour gérer vos ressources AWS via la ligne de commande, installez AWS CLI et configurez-le avec aws configure. Lors de la configuration, entrez votre AWS Access Key ID, AWS Secret Access Key que vous allez trouver dans Vous pouvez installer AWS CLI via pip, puis le configurer avec vos identifiants AWS, disponibles dans la section "AWS details" de votre compte AW, la région et le format de sortie. Une fois configuré, vous pouvez l'utiliser pour gérer vos instances EC2
 
 ## Instances.tf
 
@@ -80,5 +73,5 @@ Les fichiers Terraform `main.tf`, `Security_group.tf`, `Instances.tf` et `infra_
 Ces fichiers construisent une **infrastructure AWS sécurisée**, avec un **trafic filtré**, des **ressources privées** et une **haute disponibilité**.
 
 
-Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la Console AWS. Dans la section EC2, allez dans Key Pairs sous Network & Security et cliquez sur Create key pair. Donnez un nom à votre clé, choisissez le type RSA et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée .pem généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2.   Pour gérer vos ressources AWS via la ligne de commande, installez AWS CLI et configurez-le avec aws configure. Lors de la configuration, entrez votre AWS Access Key ID, AWS Secret Access Key que vous allez trouver dans Vous pouvez installer AWS CLI via pip, puis le configurer avec vos identifiants AWS, disponibles dans la section "AWS details" de votre compte AW, la région et le format de sortie. Une fois configuré, vous pouvez l'utiliser pour gérer vos instances EC2 
+
 
