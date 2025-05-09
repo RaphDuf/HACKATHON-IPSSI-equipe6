@@ -1,4 +1,4 @@
-# HACKATHON-IPSSI-equipe6
+# Documentation de Terraform
 ## main.tf
 
 Ce module Terraform commence par la déclaration du **provider AWS**, en spécifiant la région d’hébergement des ressources (ici, `us-east-1`). Il crée ensuite un **Virtual Private Cloud (VPC)**, élément central du réseau dans AWS. Ce VPC utilise la plage d’adresses IP privée `10.0.0.0/16`, avec l’activation du support **DNS** et des **noms d’hôtes**, ce qui est essentiel pour la résolution de noms au sein du réseau. Le VPC est également tagué pour une meilleure lisibilité dans la console AWS (`Name = "main-vpc"`).
