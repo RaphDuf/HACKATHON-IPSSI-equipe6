@@ -2,7 +2,7 @@
 
 Le fichier `Jenkinsfile` décrit une pipeline CI/CD pour un projet utilisant Jenkins.
 
-**Les prérequis sont les suivants :
+##Les prérequis sont les suivants :
 
 1. Avoir une machine Jenkins accessible depuis le dépôt GitHub et prête à l'emploi (la machine utilise le port 8080 par défaut pour l'interface web). Lien de la documentation d'installation : [Documentation Jenkins](https://www.jenkins.io/doc/book/installing/)
 2. Docker doit aussi être installé sur la machine Jenkins pour exécuter les commandes de conteneurisation. Lien de la documentation : [Documentation Docker](https://docs.docker.com/get-started/get-docker/)
