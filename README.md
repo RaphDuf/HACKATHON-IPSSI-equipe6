@@ -27,9 +27,13 @@ Dans le service 'db', on spécifie les variables d’environnement avec le mot d
 
 Pour lancer le build des images, utiliser la commande suivante :  
 ```
-docker compose up -d
+docker compose up -d --build
 ```
 Pour vérifier le statut des conteneurs, utiliser la commande :  
 ```
 docker ps
+```
+Pour supprimer les deux conteneurs créés précédemment, utiliser la commande : 
+```
+docker compose down
 ```
