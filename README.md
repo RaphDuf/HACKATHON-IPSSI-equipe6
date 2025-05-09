@@ -1,5 +1,5 @@
 # Documentation de Terraform
-Prerequis:
+## Prerequis:
 compte AWS
 Instance EC2
 Installer AWS-CLI :Pour générer une clé SSH et l'utiliser pour se connecter à une instance EC2 dans AWS, commencez par vous connecter à la Console AWS. Dans la section EC2, allez dans Key Pairs sous Network & Security et cliquez sur Create key pair. Donnez un nom à votre clé, choisissez le type RSA et la taille de la clé (2048 ou 4096 bits), puis téléchargez le fichier de clé privée .pem généré. Cette clé sera utilisée pour vous connecter en SSH à vos instances EC2.   Pour gérer vos ressources AWS via la ligne de commande, installez AWS CLI et configurez-le avec aws configure. Lors de la configuration, entrez votre AWS Access Key ID, AWS Secret Access Key que vous allez trouver dans Vous pouvez installer AWS CLI , puis le configurer avec vos identifiants AWS, disponibles dans la section "AWS details" de votre compte AW, la région et le format de sortie. Une fois configuré, vous pouvez l'utiliser pour gérer vos instances EC2
