@@ -1,5 +1,4 @@
 # HACKATHON-IPSSI-equipe6
-# HACKATHON-IPSSI-equipe6
 ## main.tf
 
 Ce module Terraform commence par la déclaration du **provider AWS**, en spécifiant la région d’hébergement des ressources (ici, `us-east-1`). Il crée ensuite un **Virtual Private Cloud (VPC)**, élément central du réseau dans AWS. Ce VPC utilise la plage d’adresses IP privée `10.0.0.0/16`, avec l’activation du support **DNS** et des **noms d’hôtes**, ce qui est essentiel pour la résolution de noms au sein du réseau. Le VPC est également tagué pour une meilleure lisibilité dans la console AWS (`Name = "main-vpc"`).
@@ -64,3 +63,26 @@ Ce script Terraform met en place l’infrastructure réseau de base dans **AWS**
 - Enfin, un **DB Subnet Group** est défini pour le service **RDS**, requis pour le bon déploiement de la base de données dans un environnement **multi-AZ sécurisé**.
 
 L'ensemble garantit une **architecture réseau bien segmentée, sécurisée et évolutive**.
+
+## Liens entre les 4 fichiers Terraform
+
+Les fichiers Terraform `main.tf`, `Security_group.tf`, `Instances.tf` et `infra_reseau.tf` créent une infrastructure Cloud sécurisée sur AWS pour l'application **GreenShop**, avec une architecture hautement disponible et segmentée.
+
+- **`main.tf`** : Déclare le **VPC** (réseau privé) et configure la base SSH pour un accès sécurisé. Ce fichier sert de point d’entrée principal pour la création des ressources dans AWS.
+
+- **`infra_reseau.tf`** : Déploie la **topologie réseau**, créant des sous-réseaux publics (pour le bastion et le Load Balancer) et privés (pour les instances et la base de données), avec des tables de routage pour un accès sécurisé via **Internet Gateway** et **NAT Gateway**.
+
+- **`Security_group.tf`** : Configure les **groupes de sécurité** :
+  - Bastion : **SSH (port 22)** depuis une IP précise.
+  - Load Balancer : **HTTP (port 80)** depuis l’extérieur.
+  - Instances privées : Connexions **internes** uniquement.
+  - Base de données : Connexions **MySQL (port 3306)** depuis les instances applicatives.
+
+- **`Instances.tf`** : Déploie les **ressources de calcul** : un **bastion** pour accéder aux instances privées, un **ALB** pour gérer le trafic HTTP vers 3 instances EC2 privées, et une **base de données RDS MariaDB** dans les sous-réseaux privés. Utilisation d’un **Target Group** et **Listener** pour la répartition du trafic.
+
+---
+
+### En résumé
+
+Ces fichiers construisent une **infrastructure AWS sécurisée**, avec un **trafic filtré**, des **ressources privées** et une **haute disponibilité**.
+
