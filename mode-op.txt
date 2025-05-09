@@ -1,9 +1,0 @@
-1. Créer un dépot github public
-2. Ajouter les crédentials docker hub dans jenkins (administrer jenkins --> crédentials --> global)
-installer plugins
-3. Nouveau item pipeline (info importantes : triggers --> github 
-                            from SCM --> scm=git
-                            coller l'url du repository
-                            branch = main)
-4. Dans github aller dans le repository puis dans settings et dans webhooks et ajouter un webhooks. Mettre l'ip de la machine jenkins:8080/github-webhook/
-5. Lancer la pipeline
