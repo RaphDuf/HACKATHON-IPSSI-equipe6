@@ -1,5 +1,5 @@
 <?php
-$host = 'docker-db-1';
+$host = 'hackathon-db-1';
 $dbname = 'greenshop';
 $username = 'greenshop_user';
 $password = 'your_secure_password';
